@@ -24,7 +24,7 @@ void ParticleRender::initShaders(const mat4 & projectionMatrix) {
 	m_shader->projection_matrix->load(projectionMatrix);
 	m_shader->disable();
 
-	m_colourShader = new ParticleColourShader("Render Engine/particles/particleColour.vert", "Render Engine/particles/particleColour.frag");
+	m_colourShader = new ParticleColourShader("Render Engine/particles/particlecolor.vert", "Render Engine/particles/particlecolor.frag");
 	
 	m_colourShader->enable();
 	m_colourShader->projection_matrix->load(projectionMatrix);

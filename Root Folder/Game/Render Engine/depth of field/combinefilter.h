@@ -14,7 +14,7 @@ public:
 
 	virtual void prepareShader(Shader * shader) {
 		//TODO:现在没法读取相机的距离
-		float focusDistance = 0;
+		float focusDistance = 1;
 		((DepthOfFieldShader *)shader)->m_AimDistance->load(focusDistance);
 	}
 

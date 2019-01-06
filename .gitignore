@@ -37,3 +37,7 @@ test/
 *.exe
 *.out
 *.app
+/Root Folder/Game.sln
+/Root Folder/Game/Game.vcxproj
+/Root Folder/Game/Game.vcxproj.filters
+/Root Folder/Game/Game.vcxproj.user
