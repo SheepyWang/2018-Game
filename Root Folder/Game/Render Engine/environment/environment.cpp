@@ -1,6 +1,7 @@
 #include "environment.h"
 
 #include "../toolbox/maths/maths_func.h"
+#include "../../Source/main/camera.h"
 
 
 float EnvironmentVariables::GRAVITY				= -10.0f;
@@ -9,8 +10,8 @@ Color EnvironmentVariables::VOID_COLOUR			= Color(1.0f,0.87f,0.6f);
 Color EnvironmentVariables::horizonColour		= Color(1.0f, 0.87f, 0.6f);
 Color EnvironmentVariables::skyColour			= Color(0.6f, 0.9f, 1.0f);
 
-//vec3 EnvironmentVariables::VISIBLE_SUN_DIR		= vec3(1.0f,-0.08f,0.5f);
-vec3 EnvironmentVariables::VISIBLE_SUN_DIR		= vec3(0.0f, 0.5f, -0.5f);
+vec3 EnvironmentVariables::VISIBLE_SUN_DIR		= vec3(1.0f,-0.08f,0.5f);
+//vec3 EnvironmentVariables::VISIBLE_SUN_DIR		= vec3(0.0f, 0.5f, -0.5f);
 
 vec2 EnvironmentVariables::MIST_VALS			= vec2(20,120);
 Color EnvironmentVariables::MIST_COL			= Color(255, 220, 210, true);
@@ -57,7 +58,7 @@ float EnvironmentVariables::getSkyRotateSpeed() {
 }
 
 
-//��ݾ��������ǿ��
+//根据距离计算光的强度
 float EnvironmentVariables::getSunEffectBrightness() {
 	return 1 - Maths::smoothStep(0.0f, 0.2f, VISIBLE_SUN_DIR.y);
 }
@@ -73,9 +74,9 @@ vec3 EnvironmentVariables::getSunPosition(vec3 sunDirection) {
 }
 
 vec2 * EnvironmentVariables::getSunScreenCoords() {
-	//TODO:����û����Ķ���view��project����
+	//TODO:这里没有真的读入view和project矩阵
+	//vec3 * pScreenCoords = Maths::converToScreenSpace(getSunPosition(VISIBLE_SUN_DIR), Camera::getCamera().CreateViewMatrix(), mat4::perspective(45, 1.78, 0.1, 300));
 	vec3 * pScreenCoords = Maths::converToScreenSpace(getSunPosition(VISIBLE_SUN_DIR), mat4(1), mat4::perspective(45, 1.78, 0.1, 300));
-//	vec3 * pScreenCoords = Maths::converToScreenSpace(getSunPosition(VISIBLE_SUN_DIR), mat4(1), mat4(1));
 	if (pScreenCoords == NULL) {
 		return NULL;
 	}
@@ -90,7 +91,7 @@ void EnvironmentVariables::update() {
 		delete sunScreenCoords;
 	}
 	sunScreenCoords = getSunScreenCoords();
-	//TODO:��ҹѭ��û��ʵ��
+	//TODO:日夜循环没有完成
 }
 
 

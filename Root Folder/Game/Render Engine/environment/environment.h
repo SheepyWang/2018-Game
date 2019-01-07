@@ -12,12 +12,12 @@ public:
 	static Color horizonColour;
 	static Color skyColour;
 	static vec3 VISIBLE_SUN_DIR;
-	static vec2 MIST_VALS;			//Îí
+	static vec2 MIST_VALS;			//雾
 	static Color MIST_COL;
 	static float SHADOW_DARKNESS;
 
 
-	//TODO£ºÈÕÒ¹Ñ­»·
+	//TODO：日夜循环
 
 private:
 	static float LARGE_NUMBER;

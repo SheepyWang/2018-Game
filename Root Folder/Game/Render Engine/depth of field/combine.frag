@@ -49,4 +49,5 @@ void main(void){
   vec3 totalColour = mix(blurColour, originalColour, nearVisibility);
   totalColour = mix(blurColour, totalColour, farVisibility);
   out_colour = vec4(totalColour, 1.0);
+  out_colour = texture(depthTexture, pass_textureCoords);
 }

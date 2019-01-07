@@ -48,6 +48,7 @@ void FlareManager::render(vec3 sunDirection) {
 	if (pSunCoords == NULL) {
 		return;
 	}
+	printf("%f %f\n", pSunCoords->x, pSunCoords->y);
 	vec2 toCenter = CENTER_SCREEN - *pSunCoords;
 	//TODO:光线较暗不便于显示暂时屏蔽
 	//float brightness = 1 - (sqrt(toCenter.x * toCenter.x + toCenter.y * toCenter.y) / MAX_SCREEN_DIS);
