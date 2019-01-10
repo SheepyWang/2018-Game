@@ -1,4 +1,4 @@
-#ifndef _ENVIRONMENT_VARIABLES_H_
+﻿#ifndef _ENVIRONMENT_VARIABLES_H_
 #define _ENVIRONMENT_VARIABLES_H_
 
 #include "../toolbox/Color.h"
@@ -15,9 +15,6 @@ public:
 	static vec2 MIST_VALS;			//雾
 	static Color MIST_COL;
 	static float SHADOW_DARKNESS;
-
-
-	//TODO：日夜循环
 
 private:
 	static float LARGE_NUMBER;

@@ -63,11 +63,11 @@ void Camera::processKeyboard() {
 		m_Pitch -= velocity * m_Sensitivity;
 	}
 
-	if (m_Pitch > 20.0f) {
-		m_Pitch = 20.0f;
+	if (m_Pitch > 30.0f) {
+		m_Pitch = 30.0f;
 	}
-	if (m_Pitch < -20.0f) {
-		m_Pitch = -20.0f;
+	if (m_Pitch < -40.0f) {
+		m_Pitch = -40.0f;
 	}
 }
 
@@ -105,8 +105,8 @@ void Camera::processMouseRotate(GLfloat xoffset, GLfloat yoffset) {
 		m_Pitch -= velocity;
 	}
 
-	if (m_Pitch > 20.0f) {
-		m_Pitch = 20.0f;
+	if (m_Pitch > 30.0f) {
+		m_Pitch = 30.0f;
 	}
 	if (m_Pitch < -20.0f) {
 		m_Pitch = -20.0f;

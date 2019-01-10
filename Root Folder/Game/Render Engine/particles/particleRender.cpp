@@ -1,4 +1,4 @@
-#include "particleRender.h"
+﻿#include "particleRender.h"
 #include "../environment/environment.h"
 #include "../../Resource Management/resource management/particleatlascache.h"
 

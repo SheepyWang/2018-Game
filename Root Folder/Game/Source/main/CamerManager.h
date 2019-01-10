@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Source/main/camera.h"
+#include "camera.h"
 
 class CameraManager {
 
