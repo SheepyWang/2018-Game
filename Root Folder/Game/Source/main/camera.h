@@ -43,5 +43,5 @@ public:
 	vec3 getTargetPosition();
 	mat4 CreateViewMatrix();
 
-	static Camera & getCamera();
+	//static Camera & getCamera();
 };

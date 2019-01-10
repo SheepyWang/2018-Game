@@ -202,8 +202,7 @@ void ParticleRender::prepare() {
 
 void ParticleRender::finishRendering() {
 	glDepthMask(true);
-	//TODO:暂时屏蔽，因为测试地形有问题
-	//OpenglUtils::cullBackFaces(true);
+	OpenglUtils::cullBackFaces(true);
 	glDisable(GL_BLEND);
 	m_vao->unbind();
 }

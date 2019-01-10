@@ -31,8 +31,7 @@ float getDepthFactor(float depth, float upperLimit){
 
 float calculateDepth(){
   float near = 0.1;
-  float far = 1024.0;
-
+  float far = 300.0;
   float depth = texture(depthTexture, pass_textureCoords).r;
   return 2.0 * near * far / (far + near - (2.0 * depth - 1.0) * (far - near));
 }
@@ -48,6 +47,8 @@ void main(void){
   float farVisibility = 1.0 - smoothlyStep(FAR_START * aimDistance, FAR_FIELD * aimDistance, depth);
   vec3 totalColour = mix(blurColour, originalColour, nearVisibility);
   totalColour = mix(blurColour, totalColour, farVisibility);
+  //vec3 totalColour = mix(vec3(1.0,0.0,0.0), vec3(0.0,0.0,1.0), nearVisibility);
+  //totalColour = mix(vec3(0.0,1.0,0.0), totalColour, farVisibility);
   out_colour = vec4(totalColour, 1.0);
-  out_colour = texture(depthTexture, pass_textureCoords);
+  //out_colour = vec4(vec3(depth/300),1.0f);
 }

@@ -185,7 +185,10 @@ mat4  Camera::lookAt(const vec3 & cameraPos, const vec3 & cameraTarget, const ve
 	return ans;
 }
 
-Camera & Camera::getCamera() {
-	static Camera camear = Camera(vec3(0, 0, 0), vec3(-20, 20, 20));
-	return camear;
-}
+//Camera & Camera::getCamera() {
+//	static Camera  * camear;
+//	if (camear == nullptr) {
+//		camear = new Camera(vec3(0, 0, 0), vec3(-10, 10, 10));
+//	}
+//	return *camear;
+//}

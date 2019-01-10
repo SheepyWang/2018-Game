@@ -9,7 +9,7 @@ public:
 	RadialBlur(int width, int height) :
 		PostProcessingFilter(new RadialBlurShader(
 			"Render Engine/post processing/basicPostProcessing.vert",
-			"Render Engine/bloom/combine.frag"), width, height, false) {
+			"Render Engine/radial blur/radialblur.frag"), width, height, false) {
 	}
 
 	virtual void prepareShader(Shader * shader) {

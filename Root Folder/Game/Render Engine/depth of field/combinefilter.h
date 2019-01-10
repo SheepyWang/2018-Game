@@ -2,7 +2,7 @@
 
 #include "depthoffieldshader.h"
 #include "..\post processing\postprocessingfilter.h"
-#include "..\..\Source\main\camera.h"
+#include "..\..\temp\CamerManager.h"
 
 class CombineFilter :public PostProcessingFilter {
 public:
@@ -15,7 +15,7 @@ public:
 
 	virtual void prepareShader(Shader * shader) {
 		//TODO:现在没法读取相机的距离
-		float focusDistance = Camera::getCamera().getAimDistance();
+		float focusDistance = CameraManager::pcamera->getAimDistance() / 2;
 		((DepthOfFieldShader *)shader)->m_AimDistance->load(focusDistance);
 	}
 

@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include "Render Engine/basics/DIsplayManager.h"
-#include "Source/main/camera.h"
 #include "Render Engine/demo renderer/demobatchrenderer.h"
 #include "World/day night cycle/daynightcycle.h"
 #include "Render Engine/lenseFlare/LenseFlare.h"
@@ -13,16 +12,23 @@
 #include "Source/entity/models.h"
 #include "temp/terrain1.h"
 #include "temp/PostProcessSelection.h"
+#include "temp/CamerManager.h"
 
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720
 
 
 int main() {
+
+	
 	
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 	DisplayManager::createDisplay();
+	CameraManager::Init();
+
+
+	//ParticleAtlasCache::loadALL();
 
 	ParticleAtlasCache::loadALL();
 
@@ -31,9 +37,9 @@ int main() {
 	dn.update();
 	
 	//Camera camera(vec3(0, 0, 0), vec3(-20, 20, 20));
-	Camera camera = Camera::getCamera();
 
-	LenseFlare lense = LenseFlare(mat4::perspective(45.0f, DisplayManager::getAspectRatio(), 0.1f, 300.0f), camera.CreateViewMatrix());
+
+	//LenseFlare lense = LenseFlare(mat4::perspective(45.0f, DisplayManager::getAspectRatio(), 0.1f, 300.0f), CameraManager::pcamera->CreateViewMatrix());
 
 	//例子发射器
 	PointSpawn * pSpwan = new PointSpawn();
@@ -57,44 +63,55 @@ int main() {
 	t.m_tshader->lightpos->load(vec3(50, 100, 50));
 	t.m_tshader->disable();
 
+	mat4 project = mat4::perspective(45.0f, DisplayManager::getAspectRatio(), 0.1f, 300.0f);
+	//mat4 project = mat4::orthographic(-50, 50, -50, 50, 0.1, 300);
+
+	Model cube = Model("Resource/dragon.obj");
+
+
 	while (!DisplayManager::closedDisplay()) {
 		
 	
 		dn.update();
 		EnvironmentVariables::update();
-
+	
+		CameraManager::pcamera->move();
 		
-		camera.move();
-
-
-		ps.setChoice();
-		ps.bind();
-		glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 		DisplayManager::clearDisplay();
+
 		//渲染光晕
 		//lense.doOcclusionTest();
 		//lense.render(EnvironmentVariables::getLightDirection(), true);
 		//渲染粒子
-		//ParticleMaster::renderParticles(camera);
+		
 
 		//更新粒子
-		//ParticleMaster::update(camera);
+		ParticleMaster::update(*CameraManager::pcamera);
 
+		ps.setChoice();
+
+		//深度贴图
 		
+		ps.bind();
+		OpenglUtils::prepareNewRenderPass(EnvironmentVariables::horizonColour);
+		glDisable(GL_CULL_FACE);
+		DisplayManager::clearDisplay();
 		t.m_tshader->enable();
-		t.m_tshader->view->load(camera.CreateViewMatrix());
+		t.m_tshader->view->load(CameraManager::pcamera->CreateViewMatrix());
 		t.render();
 		t.m_tshader->disable();
+
+		ParticleMaster::renderParticles(*CameraManager::pcamera);
 		ps.unbind();
-
 		ps.render();
-
 
 		DisplayManager::updateDisplay();
 	}
 
 	return 0;
 }
+
+
 
 
 
